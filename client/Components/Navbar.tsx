@@ -1,16 +1,15 @@
 "use client";
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { useRouter } from 'next/navigation'; 
 
 export default function Navbar() {
-  const router = useRouter(); // Initialize the router
+  const router = useRouter(); 
 
   // Function to handle logout
   const handleLogout = () => {
     localStorage.removeItem('token');
 
-    // Redirect to the login page using Next.js router
     router.push('/login');
   };
 

@@ -55,14 +55,13 @@ app.post('/upload', upload.single('file'), (req, res) => {
                     const duplicates = products.filter(product => existingIds.includes(product.pid));
 
                     if (duplicates.length > 0) {
-                        fs.unlinkSync(filePath); // Remove the file
+                        fs.unlinkSync(filePath); 
                         return res.status(400).json({ error: `Duplicate product SKUs found: ${duplicates.map(d => d.pid).join(', ')}` });
                     }
 
-                    // Save products to the database
                     ProductModel.insertMany(products)
                         .then(() => {
-                            fs.unlinkSync(filePath); // Remove the file after processing
+                            fs.unlinkSync(filePath); 
                             res.json({ message: 'Products uploaded and created successfully.' });
                         })
                         .catch(err => {
@@ -75,8 +74,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
                     res.status(500).json({ error: 'Error checking for duplicate products.' });
                 });
         } catch (error) {
-            fs.unlinkSync(filePath); // Remove the file
-            return res.status(400).json({ error: error.message }); // Return the error message to the client
+            fs.unlinkSync(filePath); 
+            return res.status(400).json({ error: error.message }); 
         }
     });
 });
@@ -84,18 +83,18 @@ app.post('/upload', upload.single('file'), (req, res) => {
 // Function to parse the file content into product objects
 function parseProductsFromFile(data) {
     const products = [];
-    const productEntries = data.split(';'); // Split by semicolon for each product
+    const productEntries = data.split(';'); 
 
     productEntries.forEach((entry, index) => {
-        // Trim the entry and skip if it's empty
+
         entry = entry.trim();
         if (!entry) {
-            return; // Skip this iteration for empty entries
+            return; 
         }
 
-        const lines = entry.split('\n'); // Split by new line
+        const lines = entry.split('\n'); 
         const product = {};
-        let isValid = true; // Track the validity of the current product entry
+        let isValid = true; 
 
         lines.forEach(line => {
             const [key, value] = line.split(':').map(item => item.trim());
@@ -114,11 +113,11 @@ function parseProductsFromFile(data) {
                         product.price = parseFloat(value);
                         break;
                     default:
-                        isValid = false; // Invalid key found
+                        isValid = false;
                         break;
                 }
             } else {
-                isValid = false; // Invalid line format
+                isValid = false;
             }
         });
 
@@ -213,10 +212,9 @@ app.post('/salesOrder/create', async (req, res) => {
 })
 
 
-// Update product quantity using 'pid'
 app.put('/product/updateQuantity/:pid', (req, res) => {
-    const { pid } = req.params; // Get the 'pid' from the URL parameters
-    const { quantity } = req.body; // Get the new quantity from the request body
+    const { pid } = req.params; 
+    const { quantity } = req.body; 
 
     ProductModel.findOneAndUpdate(
         { pid: pid }, 

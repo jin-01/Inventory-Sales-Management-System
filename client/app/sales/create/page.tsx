@@ -65,7 +65,7 @@ const CreateSalesOrderPage = () => {
             });
 
             setSuccessMessage('Sales order created successfully!');
-            setErrorMessage(''); // Clear any previous error messages
+            setErrorMessage(''); 
 
             // Reset form fields
             setSelectedProduct(null);
@@ -81,30 +81,30 @@ const CreateSalesOrderPage = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-8">
-                <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Create Sales Order</h1>
+        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300">
+            <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-10">
+                <h1 className="text-4xl font-extrabold text-center text-blue-800 mb-8">Create Sales Order</h1>
 
                 {errorMessage && (
-                    <div className="mb-4 p-3 text-center bg-red-100 text-red-700 border border-red-400 rounded">
+                    <div className="mb-4 p-4 text-center bg-red-200 text-red-800 border border-red-400 rounded-lg shadow-md">
                         {errorMessage}
                     </div>
                 )}
                 {successMessage && (
-                    <div className="mb-4 p-3 text-center bg-green-100 text-green-700 border border-green-400 rounded">
+                    <div className="mb-4 p-4 text-center bg-green-200 text-green-800 border border-green-400 rounded-lg shadow-md">
                         {successMessage}
                     </div>
                 )}
 
                 <form onSubmit={handleSalesOrderSubmit}>
-                    <div className="mb-6">
-                        <label htmlFor="product" className="block text-sm font-medium text-gray-700 mb-2">
+                    <div className="mb-8">
+                        <label htmlFor="product" className="block text-lg font-medium text-gray-700 mb-2">
                             Select Product
                         </label>
                         <select
                             name="product"
                             id="product"
-                            className="input input-bordered w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                             onChange={handleProductChange}
                             value={selectedProduct ? selectedProduct.pid : ''}
                         >
@@ -117,15 +117,15 @@ const CreateSalesOrderPage = () => {
                         </select>
                     </div>
 
-                    <div className="mb-6">
-                        <label htmlFor="sellingPrice" className="block text-sm font-medium text-gray-700 mb-2">
+                    <div className="mb-8">
+                        <label htmlFor="sellingPrice" className="block text-lg font-medium text-gray-700 mb-2">
                             Selling Price
                         </label>
                         <input
                             type="number"
                             name="sellingPrice"
                             id="sellingPrice"
-                            className="input input-bordered w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                             placeholder="Selling Price..."
                             value={sellingPrice}
                             onChange={e => setSellingPrice(parseFloat(e.target.value))}
@@ -133,15 +133,15 @@ const CreateSalesOrderPage = () => {
                         />
                     </div>
 
-                    <div className="mb-6">
-                        <label htmlFor="quantitySold" className="block text-sm font-medium text-gray-700 mb-2">
+                    <div className="mb-8">
+                        <label htmlFor="quantitySold" className="block text-lg font-medium text-gray-700 mb-2">
                             Quantity Sold
                         </label>
                         <input
                             type="number"
                             name="quantitySold"
                             id="quantitySold"
-                            className="input input-bordered w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                             placeholder="Quantity..."
                             min="1"
                             max={selectedProduct ? selectedProduct.quantity : 0}
@@ -153,7 +153,7 @@ const CreateSalesOrderPage = () => {
 
                     <button 
                         type="submit" 
-                        className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                        className="w-full p-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-lg rounded-lg hover:from-blue-600 hover:to-blue-800 transition duration-300 shadow-lg"
                     >
                         Create Sales Order
                     </button>
